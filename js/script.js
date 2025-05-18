@@ -1,11 +1,22 @@
-// === Scroll Logo to Top on Click (Portrait Only) ===
+// === Mobile Nav Toggle ===
+function toggleMenu() {
+  const nav = document.getElementById("mobileNav");
+  const blur = document.getElementById("blur-overlay");
+  nav.classList.toggle("show");
+  blur.classList.toggle("visible");
+}
+
+// Close Nav on clicking X
+document.getElementById("closeNavBtn").addEventListener("click", toggleMenu);
+
+// Scroll logo to top on portrait
 document.getElementById("logo").addEventListener("click", () => {
   if (window.innerWidth < 768) {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 });
 
-// === Responsive Logo Position (center saat scroll + portrait) ===
+// Responsive logo center on scroll in portrait
 window.addEventListener("scroll", () => {
   const logo = document.getElementById("logo");
   if (window.innerWidth < 768 && window.scrollY > 50) {
@@ -15,52 +26,38 @@ window.addEventListener("scroll", () => {
   }
 });
 
-// === Hamburger Toggle with MobileNav & Close Button ===
-function toggleMenu() {
-  const mobileNav = document.getElementById("mobileNav");
-  mobileNav.classList.toggle("show");
-
-  // Optional: blur background if needed
-  const blur = document.getElementById("blur-overlay");
-  blur?.classList.toggle("visible");
-}
-
-// === Close Menu with Close Button ===
-document.getElementById("closeNavBtn").addEventListener("click", () => {
-  document.getElementById("mobileNav").classList.remove("show");
-  document.getElementById("blur-overlay")?.classList.remove("visible");
-});
-
-// === Audio Setup & Sound Toggle ===
+// === Audio Setup ===
 document.addEventListener("DOMContentLoaded", () => {
   const audio = document.getElementById("bg-music");
-  const soundToggle = document.getElementById("soundToggle");
+  const toggle = document.getElementById("soundToggle");
 
   audio.volume = 0.4;
   audio.muted = false;
 
   audio.play().catch(() => {
-    console.log("🔇 Autoplay blocked by browser.");
+    console.log("🔇 Autoplay blocked.");
   });
 
-  soundToggle.addEventListener("click", () => {
+  toggle.addEventListener("click", () => {
     if (audio.paused) {
       audio.play();
-      soundToggle.textContent = "🔊";
+      toggle.textContent = "🔊";
     } else {
       audio.pause();
-      soundToggle.textContent = "🔈";
+      toggle.textContent = "🔈";
     }
   });
 });
 
-// === Scroll to Game Section ===
+// === Scroll To Game ===
 function scrollToGame(id) {
   const el = document.getElementById(id);
-  if (el) el.scrollIntoView({ behavior: "smooth" });
+  if (el) {
+    el.scrollIntoView({ behavior: "smooth" });
+  }
 }
 
-// === Particle Background Effect ===
+// === Particle Background ===
 const canvas = document.getElementById("particles-canvas");
 const ctx = canvas.getContext("2d");
 canvas.style.pointerEvents = "none";
@@ -82,7 +79,7 @@ let particles = Array.from({ length: 80 }, () => ({
 function drawParticles() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.fillStyle = "rgba(0, 200, 255, 0.5)";
-  particles.forEach(p => {
+  particles.forEach((p) => {
     ctx.beginPath();
     ctx.arc(p.x, p.y, p.r, 0, 2 * Math.PI);
     ctx.fill();

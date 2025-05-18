@@ -16,20 +16,21 @@
   <button id="soundToggle">🔊</button>
   <audio id="bg-music" src="music/LateNightGameDev.mp3" autoplay loop></audio>
 
-  <!-- HEADER -->
+  <!-- Sticky Header -->
   <header class="hero">
     <div class="nav-container">
       <div id="logo" class="logo">Aka Shakthi</div>
-      <div class="top-nav">
+      <nav class="top-nav">
         <a href="#projects">My Games</a>
         <a href="#about">About Me</a>
         <a href="#contact">Contact</a>
-      </div>
+      </nav>
       <div class="hamburger" onclick="toggleMenu()">☰</div>
     </div>
   </header>
 
-  <!-- Mobile Navigation Menu -->
+
+   <!-- Mobile Navigation -->
   <div id="mobileNav" class="mobile-nav">
     <button id="closeNavBtn">✕</button>
     <a href="#projects" onclick="toggleMenu()">My Games</a>
@@ -41,19 +42,20 @@
       <a href="https://www.linkedin.com/in/aka-shakthi-90b547191/" target="_blank"><img src="img/linkedin.svg" class="icon" alt="LinkedIn"></a>
     </div>
   </div>
+  <div id="blur-overlay"></div>
 
   <!-- Optional: Blur background on mobile menu open -->
   <div id="blur-overlay"></div>
 
-  <!-- HERO SECTION -->
-  <div class="hero-overlay">
+  <!-- Hero Section -->
+  <section class="hero-overlay">
     <div class="hero-content">
       <h1>I Develop Games</h1>
       <p>Creative gameplay & immersive stories.</p>
       <a href="#projects" class="button">View My Work</a>
     </div>
     <img src="img/hero-photo.png" class="hero-img" alt="Aka Shakthi">
-  </div>
+  </section>
 
 <!-- MAIN CONTENT -->
   <main>
@@ -197,12 +199,13 @@
       <!-- Tambahkan game lainnya seperti biasa -->
     </section>
 
-    <section id="about" class="transparent-section">
-  <h2>About Me</h2>
-  <p>
-    Hi, I'm Aka Shakthi — a passionate indie game developer and tech artist currently pursuing my studies while building immersive, interactive experiences. I specialize in creating modular UI systems, smooth gameplay loops, and scalable architectures using Unity and C#. Most of my work is tailored for WebGL and mobile platforms, combining clean code with artistic sensibility.
-  </p>
-</section>
+  <!-- About Me -->
+    <section id="about" class="transparent-section contact-card">
+      <h2>About Me</h2>
+      <p>
+        Hi, I'm Aka Shakthi — a passionate indie game developer and tech artist currently pursuing my studies while building immersive, interactive experiences. I specialize in creating modular UI systems, smooth gameplay loops, and scalable architectures using Unity and C#. Most of my work is tailored for WebGL and mobile platforms, combining clean code with artistic sensibility.
+      </p>
+    </section>
 
   </main>
 

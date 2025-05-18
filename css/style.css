@@ -45,29 +45,29 @@ body > *:not(#particles-canvas):not(#soundToggle) {
   box-shadow: 0 0 15px rgba(0, 255, 255, 0.05);
   border: 1px solid rgba(0, 255, 255, 0.1);
 }
-
-/* === STICKY HEADER === */
-.hero {
-  top: 0;
-  z-index: 100;
-  width: 100%;
-  backdrop-filter: blur(8px);
-  background-color: rgba(0, 0, 0, 0.4);
-  transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
-}
-
-.nav-container {
+/* ==== FIXED HEADER === */
+.site-header {
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 999;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+}
+/* === STICKY HEADER === */
+/* .hero hanya untuk konten hero sekarang */
+.hero {
+  position: relative;
+  padding-top: 4rem;
+}
+
+/* Logo kiri saat landscape */
+.nav-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 1rem 2rem;
   max-width: 1200px;
   margin: 0 auto;
-  backdrop-filter: blur(8px);
-  background-color: rgba(0, 0, 0, 0.4);
 }
 
 
@@ -250,10 +250,11 @@ body > *:not(#particles-canvas):not(#soundToggle) {
 }
 
 .hero-img {
-  width: 350px;
+  max-width: 100%;
+  height: auto;
   object-fit: contain;
-  filter: drop-shadow(0 0 15px rgba(0,255,255,0.3));
 }
+
 
 /* === MAIN SECTION === */
 main {
@@ -364,6 +365,18 @@ h2 {
   .description-block h3 {
     font-size: 1.4rem;
   }
+  @media (max-width: 768px) {
+  .hero-overlay {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero-img {
+    margin-top: 1rem;
+    width: 70%;
+  }
+}
+
 }
 
 /* === CONTACT === */
