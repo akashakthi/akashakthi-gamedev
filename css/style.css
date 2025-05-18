@@ -11,8 +11,6 @@
 }
 
 html, body {
-  margin: 0;
-  padding: 0;
   height: 100%;
   background: transparent;
   font-family: 'Inter', sans-serif;
@@ -22,7 +20,7 @@ html, body {
   z-index: 1;
 }
 
-/* ==== CANVAS PARTICLE ==== */
+/* === PARTICLE CANVAS === */
 #particles-canvas {
   position: fixed;
   top: 0;
@@ -37,32 +35,48 @@ body > *:not(#particles-canvas):not(#soundToggle) {
   position: relative;
   z-index: 1;
 }
+.transparent-section {
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 2rem;
+  border-radius: 12px;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(3px);
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.05);
+  border: 1px solid rgba(0, 255, 255, 0.1);
+}
 
-/* ==== STICKY HEADER BAR ==== */
+/* === STICKY HEADER === */
 .hero {
+  top: 0;
+  z-index: 100;
+  width: 100%;
+  backdrop-filter: blur(8px);
+  background-color: rgba(0, 0, 0, 0.4);
+  transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
+}
+
+.nav-container {
   position: sticky;
   top: 0;
-  z-index: 10;
-  backdrop-filter: blur(4px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  backdrop-filter: blur(8px);
   background-color: rgba(0, 0, 0, 0.4);
 }
 
-/* ==== NAV BAR LAYOUT ==== */
-.nav-container {
-  display: flex;
-  justify-content: space-between; /* Fix posisi logo kiri */
-  align-items: center;
-  padding: 1rem 2rem;
-  position: relative;
-  z-index: 10;
-}
 
 .logo {
   font-weight: bold;
   font-size: 1.2rem;
   color: white;
   cursor: pointer;
-  transition: all 0.3s ease;
+  flex-shrink: 0;
 }
 
 .logo.center {
@@ -73,23 +87,26 @@ body > *:not(#particles-canvas):not(#soundToggle) {
   z-index: 999;
 }
 
+@media (min-width: 769px) {
+  .logo {
+    position: static;
+    transform: none;
+    left: auto;
+  }
+}
+
 .top-nav {
   display: flex;
   gap: 2rem;
 }
 
 .top-nav a {
-  color: var(--text-color);
+  color: white;
   text-decoration: none;
-  font-weight: 500;
-  transition: all 0.3s ease;
+  font-weight: bold;
 }
 
-.top-nav a:hover {
-  color: var(--accent);
-  text-shadow: 0 0 6px rgba(0, 188, 212, 0.7);
-}
-
+/* === HAMBURGER === */
 .hamburger {
   display: none;
   font-size: 1.5rem;
@@ -98,7 +115,27 @@ body > *:not(#particles-canvas):not(#soundToggle) {
   z-index: 20;
 }
 
-/* ==== MOBILE NAVIGATION ==== */
+@media (max-width: 768px) {
+  .top-nav {
+    display: none;
+  }
+
+  .hamburger {
+    display: block;
+  }
+}
+
+@media (min-width: 769px) {
+  .top-nav {
+    display: flex !important;
+  }
+
+  .hamburger {
+    display: none !important;
+  }
+}
+
+/* === MOBILE NAVIGATION === */
 .mobile-nav {
   display: none;
   position: fixed;
@@ -156,7 +193,7 @@ body > *:not(#particles-canvas):not(#soundToggle) {
   cursor: pointer;
 }
 
-/* ==== SOUND TOGGLE ==== */
+/* === SOUND TOGGLE === */
 #soundToggle {
   position: fixed;
   bottom: 1rem;
@@ -171,25 +208,7 @@ body > *:not(#particles-canvas):not(#soundToggle) {
   cursor: pointer;
 }
 
-/* ==== BLUR OVERLAY (optional if needed) ==== */
-#blur-overlay {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  backdrop-filter: blur(6px);
-  background: rgba(0, 0, 0, 0.4);
-  z-index: 5;
-  transition: 0.3s ease;
-}
-
-#blur-overlay.visible {
-  display: block;
-}
-
-/* ==== HERO SECTION ==== */
+/* === HERO SECTION === */
 .hero-overlay {
   max-width: 1200px;
   margin: auto;
@@ -236,7 +255,7 @@ body > *:not(#particles-canvas):not(#soundToggle) {
   filter: drop-shadow(0 0 15px rgba(0,255,255,0.3));
 }
 
-/* ==== MAIN CONTENT ==== */
+/* === MAIN SECTION === */
 main {
   padding: 3rem 2rem;
 }
@@ -271,6 +290,7 @@ h2 {
   box-shadow: 0 0 10px rgba(0, 188, 212, 0.5);
 }
 
+/* === GAME DETAIL === */
 .game-detail {
   display: flex;
   flex-direction: row;
@@ -324,28 +344,7 @@ h2 {
   text-decoration: underline;
 }
 
-
-/* ==== ICONS ==== */
-.icon {
-  width: 24px;
-  height: 24px;
-  vertical-align: middle;
-  filter: drop-shadow(0 0 2px rgba(0,255,255,0.3));
-  transition: transform 0.2s ease;
-}
-
-.icon:hover {
-  transform: scale(1.1);
-}
-
-/* ==== FOOTER ==== */
-footer {
-  text-align: center;
-  padding: 2rem;
-  background: #111;
-  color: #aaa;
-}
-
+/* === RESPONSIVE GAME LAYOUT === */
 @media (max-width: 768px) {
   .game-detail {
     flex-direction: column;
@@ -353,16 +352,7 @@ footer {
     text-align: center;
   }
 
-  .hamburger {
-    display: block;
-  }
-}
-
-.contact-section {
-  padding: 3rem 2rem;
-  text-align: center;
-}
-.game-thumb {
+  .game-thumb {
     width: 100%;
     max-width: 400px;
   }
@@ -374,7 +364,13 @@ footer {
   .description-block h3 {
     font-size: 1.4rem;
   }
+}
 
+/* === CONTACT === */
+.contact-section {
+  padding: 3rem 2rem;
+  text-align: center;
+}
 
 .contact-icons {
   display: flex;
@@ -406,6 +402,7 @@ footer {
   height: 20px;
   filter: drop-shadow(0 0 2px rgba(0,255,255,0.4));
 }
+
 .contact-card {
   max-width: 600px;
   margin: 2rem auto;
@@ -415,4 +412,25 @@ footer {
   backdrop-filter: blur(4px);
   box-shadow: 0 0 15px rgba(0, 255, 255, 0.05);
   border: 1px solid rgba(0, 255, 255, 0.1);
+}
+
+/* === FOOTER === */
+footer {
+  text-align: center;
+  padding: 2rem;
+  background: #111;
+  color: #aaa;
+}
+
+/* === ICON GENERAL === */
+.icon {
+  width: 24px;
+  height: 24px;
+  vertical-align: middle;
+  filter: drop-shadow(0 0 2px rgba(0,255,255,0.3));
+  transition: transform 0.2s ease;
+}
+
+.icon:hover {
+  transform: scale(1.1);
 }
