@@ -1,33 +1,34 @@
-// === Responsive Hamburger Menu ===
+// === Scroll Logo to Top on Click (Portrait Only) ===
+document.getElementById("logo").addEventListener("click", () => {
+  if (window.innerWidth < 768) {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+});
+
+// === Responsive Logo Position (center saat scroll + portrait) ===
+window.addEventListener("scroll", () => {
+  const logo = document.getElementById("logo");
+  if (window.innerWidth < 768 && window.scrollY > 50) {
+    logo.classList.add("center");
+  } else {
+    logo.classList.remove("center");
+  }
+});
+
+// === Hamburger Toggle with MobileNav & Close Button ===
 function toggleMenu() {
-  const nav = document.getElementById("mobileNav");
-  nav.classList.toggle("show");
+  const mobileNav = document.getElementById("mobileNav");
+  mobileNav.classList.toggle("show");
+
+  // Optional: blur background if needed
+  const blur = document.getElementById("blur-overlay");
+  blur?.classList.toggle("visible");
 }
 
-// Close menu when link is clicked
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll('#mobileNav a').forEach(link => {
-    link.addEventListener('click', () => {
-      document.getElementById("mobileNav").classList.remove("show");
-    });
-  });
-
-  // Scroll logo to top in portrait
-  const logo = document.getElementById("logo");
-  logo.addEventListener("click", () => {
-    if (window.innerWidth < 768) {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-  });
-
-  // Responsive logo center while scrolling
-  window.addEventListener("scroll", () => {
-    if (window.innerWidth < 768 && window.scrollY > 50) {
-      logo.classList.add("center");
-    } else {
-      logo.classList.remove("center");
-    }
-  });
+// === Close Menu with Close Button ===
+document.getElementById("closeNavBtn").addEventListener("click", () => {
+  document.getElementById("mobileNav").classList.remove("show");
+  document.getElementById("blur-overlay")?.classList.remove("visible");
 });
 
 // === Audio Setup & Sound Toggle ===
@@ -38,12 +39,10 @@ document.addEventListener("DOMContentLoaded", () => {
   audio.volume = 0.4;
   audio.muted = false;
 
-  // Try autoplay (will fail silently on some browsers)
   audio.play().catch(() => {
     console.log("🔇 Autoplay blocked by browser.");
   });
 
-  // Manual toggle
   soundToggle.addEventListener("click", () => {
     if (audio.paused) {
       audio.play();
@@ -61,7 +60,7 @@ function scrollToGame(id) {
   if (el) el.scrollIntoView({ behavior: "smooth" });
 }
 
-// === Floating Particle Background ===
+// === Particle Background Effect ===
 const canvas = document.getElementById("particles-canvas");
 const ctx = canvas.getContext("2d");
 canvas.style.pointerEvents = "none";
@@ -73,7 +72,7 @@ function resizeCanvas() {
 resizeCanvas();
 window.addEventListener("resize", resizeCanvas);
 
-const particles = Array.from({ length: 80 }, () => ({
+let particles = Array.from({ length: 80 }, () => ({
   x: Math.random() * window.innerWidth,
   y: Math.random() * window.innerHeight,
   r: Math.random() * 2 + 1,
@@ -94,5 +93,4 @@ function drawParticles() {
     }
   });
 }
-
 setInterval(drawParticles, 33);
