@@ -1,36 +1,101 @@
+:root {
+  --bg-color: #f9f9f9;
+  --text-color: #222;
+  --header-bg: #333;
+  --nav-link: #80d8ff;
+  --button-bg: #007acc;
+  --button-hover: #005fa3;
+  --footer-bg: #eee;
+}
+
+body.dark {
+  --bg-color: #121212;
+  --text-color: #f0f0f0;
+  --header-bg: #1f1f1f;
+  --nav-link: #80d8ff;
+  --button-bg: #2196f3;
+  --button-hover: #1976d2;
+  --footer-bg: #1a1a1a;
+}
 
 body {
   font-family: sans-serif;
-  background-color: #f4f4f4;
-  color: #333;
   margin: 0;
+  padding: 0;
+  background: var(--bg-color);
+  color: var(--text-color);
+  scroll-behavior: smooth;
+  transition: background 0.3s, color 0.3s;
+}
+
+header {
+  background: var(--header-bg);
+  color: white;
+  padding: 1rem;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+header h1 {
+  margin: 0.2em 0;
+}
+
+nav a {
+  margin: 0 1em;
+  color: var(--nav-link);
+  text-decoration: none;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+main {
   padding: 2rem;
 }
-.container {
-  max-width: 900px;
-  margin: auto;
-  background: #fff;
-  padding: 2rem;
-  border-radius: 10px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.1);
+
+.project-card {
+  background: white;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
 }
-img {
-  width: 100%;
-  border-radius: 10px;
-  margin-top: 1rem;
+
+.project-card:hover {
+  transform: scale(1.02);
 }
-h1, h2 {
-  color: #222;
-}
+
 .button {
   display: inline-block;
-  margin-top: 1rem;
-  padding: 10px 20px;
-  background-color: #007acc;
+  margin-top: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: var(--button-bg);
   color: white;
   text-decoration: none;
-  border-radius: 6px;
+  border-radius: 4px;
 }
+
 .button:hover {
-  background-color: #005fa3;
+  background: var(--button-hover);
+}
+
+footer {
+  background: var(--footer-bg);
+  text-align: center;
+  padding: 1rem;
+  margin-top: 2rem;
+}
+
+.toggle-darkmode {
+  margin-top: 1rem;
+  background: none;
+  border: 2px solid white;
+  padding: 0.3rem 0.7rem;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
 }

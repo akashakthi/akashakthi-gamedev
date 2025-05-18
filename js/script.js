@@ -1,4 +1,8 @@
+document.addEventListener("DOMContentLoaded", () => {
+  console.log("Portfolio ready!");
 
-document.addEventListener("DOMContentLoaded", function () {
-  console.log("Portfolio loaded successfully!");
+  const toggleBtn = document.getElementById("toggle-darkmode");
+  toggleBtn.addEventListener("click", () => {
+    document.body.classList.toggle("dark");
+  });
 });
