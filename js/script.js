@@ -1,58 +1,92 @@
-// Toggle hamburger menu with blur background
+// === Responsive Hamburger Menu ===
 function toggleMenu() {
-  const nav = document.getElementById("mainNav");
-  const blurBg = document.getElementById("blur-overlay");
-  const mobilePanel = document.getElementById("mobileNav");
-  nav.classList.toggle("active");
-  blurBg.classList.toggle("visible");
-  mobilePanel.classList.toggle("show");
+  const nav = document.getElementById("mobileNav");
+  nav.classList.toggle("show");
 }
 
-// Auto audio play
-window.addEventListener("DOMContentLoaded", () => {
-  const audio = new Audio("audio/Late Night Game Dev.mp3");
-  audio.loop = true;
-  audio.volume = 0.4;
-  audio.play().catch(e => console.log("Audio autoplay blocked by browser"));
+// Close menu when link is clicked
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll('#mobileNav a').forEach(link => {
+    link.addEventListener('click', () => {
+      document.getElementById("mobileNav").classList.remove("show");
+    });
+  });
+
+  // Scroll logo to top in portrait
+  const logo = document.getElementById("logo");
+  logo.addEventListener("click", () => {
+    if (window.innerWidth < 768) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  });
+
+  // Responsive logo center while scrolling
+  window.addEventListener("scroll", () => {
+    if (window.innerWidth < 768 && window.scrollY > 50) {
+      logo.classList.add("center");
+    } else {
+      logo.classList.remove("center");
+    }
+  });
 });
 
-// Particle effect
-const canvas = document.createElement('canvas');
-canvas.id = 'particles-canvas';
-document.body.appendChild(canvas);
-const ctx = canvas.getContext('2d');
-canvas.style.position = 'fixed';
-canvas.style.top = 0;
-canvas.style.left = 0;
-canvas.style.pointerEvents = 'none';
-canvas.style.zIndex = 0;
+// === Audio Setup & Sound Toggle ===
+document.addEventListener("DOMContentLoaded", () => {
+  const audio = document.getElementById("bg-music");
+  const soundToggle = document.getElementById("soundToggle");
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+  audio.volume = 0.4;
+  audio.muted = false;
 
-let particles = [];
-for (let i = 0; i < 80; i++) {
-  particles.push({
-    x: Math.random() * canvas.width,
-    y: Math.random() * canvas.height,
-    r: Math.random() * 2 + 1,
-    d: Math.random() * 1 + 0.5
+  // Try autoplay (will fail silently on some browsers)
+  audio.play().catch(() => {
+    console.log("🔇 Autoplay blocked by browser.");
   });
+
+  // Manual toggle
+  soundToggle.addEventListener("click", () => {
+    if (audio.paused) {
+      audio.play();
+      soundToggle.textContent = "🔊";
+    } else {
+      audio.pause();
+      soundToggle.textContent = "🔈";
+    }
+  });
+});
+
+// === Scroll to Game Section ===
+function scrollToGame(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: "smooth" });
 }
+
+// === Floating Particle Background ===
+const canvas = document.getElementById("particles-canvas");
+const ctx = canvas.getContext("2d");
+canvas.style.pointerEvents = "none";
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
+
+const particles = Array.from({ length: 80 }, () => ({
+  x: Math.random() * window.innerWidth,
+  y: Math.random() * window.innerHeight,
+  r: Math.random() * 2 + 1,
+  d: Math.random() * 1 + 0.5,
+}));
 
 function drawParticles() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.fillStyle = "rgba(0, 200, 255, 0.5)";
   particles.forEach(p => {
     ctx.beginPath();
-    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2, true);
+    ctx.arc(p.x, p.y, p.r, 0, 2 * Math.PI);
     ctx.fill();
-  });
-  update();
-}
-
-function update() {
-  particles.forEach(p => {
     p.y += p.d;
     if (p.y > canvas.height) {
       p.y = 0;
@@ -62,8 +96,3 @@ function update() {
 }
 
 setInterval(drawParticles, 33);
-
-window.addEventListener('resize', () => {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-});
