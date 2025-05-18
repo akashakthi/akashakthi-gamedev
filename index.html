@@ -6,9 +6,30 @@
   <title>Aka Shakthi – Game Developer Portfolio</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Inter&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css" />
+ 
+
 </head>
 <body>
   <header class="hero">
+    <div class="nav-container">
+      <div class="logo">🎮 Aka Shakthi</div>
+      <div class="top-nav">
+        <a href="#about">About Me</a>
+        <a href="#projects">My Games</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="hamburger" onclick="toggleMenu()" style="margin-left:auto">☰</div>
+    </div>
+      <nav class="main-nav" id="mainNav" style="display:none">
+  <a href="#about">About Me</a>
+  <a href="#projects">My Games</a>
+  <a href="#contact">Contact</a>
+  <a href="https://github.com/akashakthi" target="_blank"><img src="img/github.svg" alt="GitHub" class="icon" /></a>
+  <a href="#"><img src="img/unity.svg" alt="Unity" class="icon" /></a>
+  <a href="https://www.linkedin.com/in/aka-shakthi-90b547191/" target="_blank"><img src="img/linkedin.svg" alt="LinkedIn" class="icon" /></a>
+</nav>
+      <div class="hamburger" onclick="toggleMenu()">☰</div>
+    </div>
     <div class="hero-overlay">
       <div class="hero-content">
         <h1>I Develop Games</h1>
@@ -20,28 +41,128 @@
   </header>
 
   <main>
+    <section id="about">
+      <h2>About Me</h2>
+      <p>Hi, I'm Aka Shakthi, an indie game developer passionate about modular UI and immersive gameplay. I specialize in Unity and WebGL game projects.</p>
+    </section>
     <section id="projects">
       <h2>My Games</h2>
-      <div class="project-grid">
-        <div class="project-card"><a href="https://aka-shakthi.itch.io/the-avengers-seed" target="_blank">The Avengers Seed</a></div>
-        <div class="project-card"><a href="https://aka-shakthi.itch.io/swaraquest" target="_blank">Swaraquest</a></div>
-        <div class="project-card"><a href="https://aka-shakthi.itch.io/bolos" target="_blank">Bolos</a></div>
-        <div class="project-card"><a href="https://aka-shakthi.itch.io/bunny-crime" target="_blank">Bunny Crime</a></div>
-        <div class="project-card"><a href="https://aka-shakthi.itch.io/clickhit" target="_blank">Clickhit</a></div>
-        <div class="project-card"><a href="https://aka-shakthi.itch.io/downdie" target="_blank">Downdie</a></div>
-        <div class="project-card"><a href="https://at-sauri.itch.io/evadrone" target="_blank">Evadrone</a></div>
-        <div class="project-card"><a href="https://aka-shakthi.itch.io/keepmoving" target="_blank">Keepmoving</a></div>
-        <div class="project-card"><a href="https://yaaanbo.itch.io/mythwood-garden" target="_blank">Mythwood Garden</a></div>
-        <div class="project-card"><a href="https://aka-shakthi.itch.io/path-to-glory" target="_blank">Path to Glory</a></div>
-        <div class="project-card"><a href="https://aka-shakthi.itch.io/pride-of-republic" target="_blank">Pride of Republic</a></div>
-        <div class="project-card"><a href="https://aka-shakthi.itch.io/rythm-dash-mmtcfest" target="_blank">Rythm Dash MMTCFest</a></div>
-        <div class="project-card"><a href="https://aka-shakthi.itch.io/wayahe-turu" target="_blank">Wayahe Turu</a></div>
+
+      <div class="game-nav">
+        <button onclick="scrollToGame('game1')">The Avengers Seed</button>
+        <button onclick="scrollToGame('game2')">Swaraquest</button>
+        <button onclick="scrollToGame('game3')">Bolos</button>
+        <button onclick="scrollToGame('game4')">Bunny Crime</button>
+        <button onclick="scrollToGame('game5')">Clickhit</button>
+        <button onclick="scrollToGame('game6')">Downdie</button>
+        <button onclick="scrollToGame('game7')">Evadrone</button>
+        <button onclick="scrollToGame('game8')">Keepmoving</button>
+        <button onclick="scrollToGame('game9')">Mythwood Garden</button>
+        <button onclick="scrollToGame('game10')">Path to Glory</button>
+        <button onclick="scrollToGame('game11')">Pride of Republic</button>
+        <button onclick="scrollToGame('game12')">Rythm Dash MMTCFest</button>
+        <button onclick="scrollToGame('game13')">Wayahe Turu</button>
+      </div>
+
+      <div class="game-detail" id="game1">
+  <img src="img/the-avengers-seed.jpg" class="game-thumb" alt="The Avengers Seed">
+        <h3>The Avengers Seed</h3>
+        <p>Story-driven platformer made for game jam.</p>
+        <a href="https://aka-shakthi.itch.io/the-avengers-seed" target="_blank">▶️ Play on Itch.io</a>
+      </div>
+      <div class="game-detail" id="game2">
+  <img src="img/swaraquest.jpg" class="game-thumb" alt="Swaraquest">
+        <h3>Swaraquest</h3>
+        <p>Rhythm-based puzzle game using sound cues.</p>
+        <a href="https://aka-shakthi.itch.io/swaraquest" target="_blank">▶️ Play on Itch.io</a>
+      </div>
+      <div class="game-detail" id="game3">
+  <img src="img/bolos.jpg" class="game-thumb" alt="Bolos">
+        <h3>Bolos</h3>
+        <p>A short interactive narrative with twists.</p>
+        <a href="https://aka-shakthi.itch.io/bolos" target="_blank">▶️ Play on Itch.io</a>
+      </div>
+      <div class="game-detail" id="game4">
+  <img src="img/bunny-crime.jpg" class="game-thumb" alt="Bunny Crime">
+        <h3>Bunny Crime</h3>
+        <p>Funny chaotic mystery game made in jam.</p>
+        <a href="https://aka-shakthi.itch.io/bunny-crime" target="_blank">▶️ Play on Itch.io</a>
+      </div>
+      <div class="game-detail" id="game5">
+  <img src="img/clickhit.jpg" class="game-thumb" alt="Clickhit">
+        <h3>Clickhit</h3>
+        <p>Simple clicker game with an aggressive twist.</p>
+        <a href="https://aka-shakthi.itch.io/clickhit" target="_blank">▶️ Play on Itch.io</a>
+      </div>
+      <div class="game-detail" id="game6">
+  <img src="img/downdie.jpg" class="game-thumb" alt="Downdie">
+        <h3>Downdie</h3>
+        <p>A rage game you climb... but downward.</p>
+        <a href="https://aka-shakthi.itch.io/downdie" target="_blank">▶️ Play on Itch.io</a>
+      </div>
+      <div class="game-detail" id="game7">
+  <img src="img/evadrone.jpg" class="game-thumb" alt="Evadrone">
+        <h3>Evadrone</h3>
+        <p>Evade obstacles and drone logic in a confined space.</p>
+        <a href="https://at-sauri.itch.io/evadrone" target="_blank">▶️ Play on Itch.io</a>
+      </div>
+      <div class="game-detail" id="game8">
+  <img src="img/keepmoving.jpg" class="game-thumb" alt="Keepmoving">
+        <h3>Keepmoving</h3>
+        <p>Endless rhythm runner with pixel vibes.</p>
+        <a href="https://aka-shakthi.itch.io/keepmoving" target="_blank">▶️ Play on Itch.io</a>
+      </div>
+      <div class="game-detail" id="game9">
+  <img src="img/mythwood-garden.jpg" class="game-thumb" alt="Mythwood Garden">
+        <h3>Mythwood Garden</h3>
+        <p>Wholesome harvest, grow & design with lore.</p>
+        <a href="https://yaaanbo.itch.io/mythwood-garden" target="_blank">▶️ Play on Itch.io</a>
+      </div>
+      <div class="game-detail" id="game10">
+  <img src="img/path-to-glory.jpg" class="game-thumb" alt="Path to Glory">
+        <h3>Path to Glory</h3>
+        <p>Side-scrolling action for competition.</p>
+        <a href="https://aka-shakthi.itch.io/path-to-glory" target="_blank">▶️ Play on Itch.io</a>
+      </div>
+      <div class="game-detail" id="game11">
+  <img src="img/pride-of-republic.jpg" class="game-thumb" alt="Pride of Republic">
+        <h3>Pride of Republic</h3>
+        <p>Political turn-based strategy game. Restore national integrity.</p>
+        <a href="https://aka-shakthi.itch.io/pride-of-republic" target="_blank">▶️ Play on Itch.io</a>
+      </div>
+      <div class="game-detail" id="game12">
+  <img src="img/rythm-dash-mmtcfest.jpg" class="game-thumb" alt="Rythm Dash MMTCFest">
+        <h3>Rythm Dash MMTCFest</h3>
+        <p>Beat-based endless runner for MMTC Festival.</p>
+        <a href="https://aka-shakthi.itch.io/rythm-dash-mmtcfest" target="_blank">▶️ Play on Itch.io</a>
+      </div>
+      <div class="game-detail" id="game13">
+  <img src="img/wayahe-turu.jpg" class="game-thumb" alt="Wayahe Turu">
+        <h3>Wayahe Turu</h3>
+        <p>Comedy clicker about “sleepiness” + chaos.</p>
+        <a href="https://aka-shakthi.itch.io/wayahe-turu" target="_blank">▶️ Play on Itch.io</a>
       </div>
     </section>
   </main>
 
+  <section id="contact">
+    <h2>Contact Information</h2>
+    <p>Email: <a href="mailto:akashakthi0@gmail.com">akashakthi0@gmail.com</a></p>
+    <p>Instagram: <a href="https://www.instagram.com/yknwla/" target="_blank">@yknwla</a></p>
+  </section>
+
   <footer>
     <p>© 2025 Aka Shakthi. All rights reserved.</p>
   </footer>
+ <div id="blur-overlay"></div>
+ <div id="mobileNav" class="mobile-nav">
+  <a href="#projects">My Games</a>
+  <a href="#about">About Me</a>
+  <a href="#contact">Contact</a>
+</div>
+
+  <canvas id="particles-canvas"></canvas>
+  <script src="js/script.js"></script>
+  
 </body>
 </html>
