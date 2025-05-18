@@ -1,101 +1,115 @@
 :root {
-  --bg-color: #f9f9f9;
-  --text-color: #222;
-  --header-bg: #333;
-  --nav-link: #80d8ff;
-  --button-bg: #007acc;
-  --button-hover: #005fa3;
-  --footer-bg: #eee;
+  --bg-color: #0a0a0a;
+  --text-color: #fff;
+  --accent: #00bcd4;
 }
 
-body.dark {
-  --bg-color: #121212;
-  --text-color: #f0f0f0;
-  --header-bg: #1f1f1f;
-  --nav-link: #80d8ff;
-  --button-bg: #2196f3;
-  --button-hover: #1976d2;
-  --footer-bg: #1a1a1a;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-  font-family: sans-serif;
-  margin: 0;
-  padding: 0;
+  font-family: 'Inter', sans-serif;
   background: var(--bg-color);
   color: var(--text-color);
   scroll-behavior: smooth;
-  transition: background 0.3s, color 0.3s;
 }
 
-header {
-  background: var(--header-bg);
-  color: white;
-  padding: 1rem;
-  text-align: center;
-  position: sticky;
-  top: 0;
-  z-index: 999;
+.hero {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: linear-gradient(145deg, #000000 50%, #1a1a1a 100%);
 }
 
-header h1 {
-  margin: 0.2em 0;
-}
-
-nav a {
-  margin: 0 1em;
-  color: var(--nav-link);
-  text-decoration: none;
-}
-
-nav a:hover {
-  text-decoration: underline;
-}
-
-main {
+.hero-overlay {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   padding: 2rem;
 }
 
-.project-card {
-  background: white;
-  padding: 1rem;
+.hero-content {
+  max-width: 600px;
+  z-index: 2;
+}
+
+.hero-content h1 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 3rem;
   margin-bottom: 1rem;
-  border-radius: 8px;
-  box-shadow: 0 0 5px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease;
+  color: var(--accent);
 }
 
-.project-card:hover {
-  transform: scale(1.02);
+.hero-content p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
 }
 
-.button {
-  display: inline-block;
-  margin-top: 0.5rem;
-  padding: 0.5rem 1rem;
-  background: var(--button-bg);
-  color: white;
+.hero-content .button {
+  background: var(--accent);
+  padding: 0.8rem 1.6rem;
+  color: #000;
+  font-weight: bold;
   text-decoration: none;
-  border-radius: 4px;
+  border-radius: 8px;
+  transition: background 0.3s ease;
 }
 
-.button:hover {
-  background: var(--button-hover);
+.hero-content .button:hover {
+  background: #00acc1;
+}
+
+.hero-img {
+  width: 350px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 15px rgba(0,255,255,0.3));
+}
+
+main {
+  padding: 3rem 2rem;
+}
+
+h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.project-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.project-card {
+  background: #1a1a1a;
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0,255,255,0.05);
+}
+
+.project-card a {
+  color: var(--accent);
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.project-card a:hover {
+  text-decoration: underline;
 }
 
 footer {
-  background: var(--footer-bg);
   text-align: center;
-  padding: 1rem;
-  margin-top: 2rem;
-}
-
-.toggle-darkmode {
-  margin-top: 1rem;
-  background: none;
-  border: 2px solid white;
-  padding: 0.3rem 0.7rem;
-  border-radius: 5px;
-  color: white;
-  cursor: pointer;
+  padding: 2rem;
+  background: #111;
+  color: #aaa;
 }
