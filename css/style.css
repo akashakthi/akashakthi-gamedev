@@ -304,6 +304,12 @@ h2 {
   border: 1px solid rgba(0, 255, 255, 0.1);
   backdrop-filter: blur(3px);
   box-shadow: 0 0 15px rgba(0, 255, 255, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.game-detail:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
 }
 
 .game-thumb {
@@ -313,6 +319,11 @@ h2 {
   object-fit: cover;
   box-shadow: 0 0 10px rgba(0,255,255,0.25);
   flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.game-thumb:hover {
+  transform: scale(1.05);
 }
 
 .description-block {
@@ -356,6 +367,7 @@ h2 {
   .game-thumb {
     width: 100%;
     max-width: 400px;
+    transition: transform 0.3s ease;
   }
 
   .description-block {
