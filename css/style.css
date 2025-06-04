@@ -459,3 +459,24 @@ footer {
 .icon:hover {
   transform: scale(1.1);
 }
+
+/* === NEON HOVER EFFECT === */
+.logo:hover,
+.top-nav a:hover,
+.mobile-nav a:hover {
+  background: linear-gradient(90deg, #00ffff, #ff00ff, #00ffff);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: neonWalk 2s linear infinite;
+  filter: drop-shadow(0 0 6px #00ffff);
+}
+
+@keyframes neonWalk {
+  from {
+    background-position: 0% 50%;
+  }
+  to {
+    background-position: 200% 50%;
+  }
+}
