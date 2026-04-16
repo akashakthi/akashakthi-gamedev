@@ -7,9 +7,9 @@
   --text-color: #f4fbff;
   --muted-text: #bdd5e4;
   --accent: #8cf6ff;
-  --card-bg: rgba(255, 255, 255, 0.07);
-  --card-border: rgba(169, 235, 255, 0.28);
-  --shadow: 0 18px 40px rgba(1, 6, 18, 0.62);
+  --card-bg: rgba(9, 16, 30, 0.74);
+  --card-border: rgba(125, 186, 230, 0.22);
+  --shadow: 0 18px 40px rgba(1, 4, 12, 0.78);
   --glass-highlight: rgba(208, 245, 255, 0.35);
   --neon-glow: 0 0 14px rgba(130, 245, 255, 0.8), 0 0 30px rgba(140, 91, 255, 0.45);
 }
@@ -102,8 +102,7 @@ body > *:not(#particles-canvas) {
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 30;
-  transition: padding 0.22s ease;
+  z-index: 1100;
 }
 
 .nav-container {
@@ -115,21 +114,6 @@ body > *:not(#particles-canvas) {
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
-}
-
-.hero.scrolled {
-  padding-top: 0.45rem;
-}
-
-.hero.scrolled .nav-container {
-  transform: translateY(-2px);
-  box-shadow: 0 14px 34px rgba(5, 13, 28, 0.42);
-}
-
-.brand-stack {
-  display: grid;
-  gap: 0.06rem;
 }
 
 .logo {
@@ -137,15 +121,6 @@ body > *:not(#particles-canvas) {
   font-size: 1.1rem;
   letter-spacing: 0.05em;
   cursor: pointer;
-}
-
-.header-role,
-.mobile-role {
-  font-size: 0.72rem;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
-  color: var(--muted-text);
-  font-weight: 700;
 }
 
 .top-nav {
@@ -162,8 +137,8 @@ body > *:not(#particles-canvas) {
 
 .floating-controls {
   position: fixed;
-  right: 5.8rem;
-  bottom: 1rem;
+  right: max(1rem, env(safe-area-inset-right));
+  bottom: max(1rem, env(safe-area-inset-bottom));
   display: flex;
   z-index: 999;
 }
@@ -183,8 +158,8 @@ body > *:not(#particles-canvas) {
 
 .floating-theme-button {
   position: fixed;
-  right: 1rem;
-  bottom: 1rem;
+  right: max(1rem, env(safe-area-inset-right));
+  bottom: max(1rem, env(safe-area-inset-bottom));
   width: 56px;
   height: 56px;
   padding: 0;
@@ -194,6 +169,10 @@ body > *:not(#particles-canvas) {
   justify-content: center;
   box-shadow: 0 10px 24px rgba(10, 17, 34, 0.35);
   z-index: 1000;
+}
+
+.floating-controls {
+  transform: translateX(calc(-56px - 0.85rem));
 }
 
 .hero-overlay {
@@ -403,10 +382,6 @@ footer {
   gap: 0.9rem;
 }
 
-.mobile-role {
-  margin-top: 0.7rem;
-}
-
 #closeNavBtn {
   position: absolute;
   top: 1rem;
@@ -480,13 +455,16 @@ footer {
   }
 
   .floating-controls {
-    right: 5.2rem;
-    bottom: 0.9rem;
+    right: max(0.85rem, env(safe-area-inset-right));
+    bottom: max(0.85rem, env(safe-area-inset-bottom));
+    transform: translateX(calc(-52px - 0.65rem));
   }
 
   .floating-theme-button {
-    right: 0.9rem;
-    bottom: 0.9rem;
+    right: max(0.85rem, env(safe-area-inset-right));
+    bottom: max(0.85rem, env(safe-area-inset-bottom));
+    width: 52px;
+    height: 52px;
   }
 }
 

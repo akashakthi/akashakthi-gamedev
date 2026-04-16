@@ -83,12 +83,6 @@ function setTheme(theme) {
   themeToggle.textContent = theme === 'day' ? '☀️' : '🌙';
 }
 
-function updateHeaderState() {
-  const header = document.querySelector('.hero');
-  if (!header) return;
-  header.classList.toggle('scrolled', window.scrollY > 18);
-}
-
 document.addEventListener('DOMContentLoaded', () => {
   const audio = document.getElementById('bg-music');
   const soundToggle = document.getElementById('soundToggle');
@@ -97,7 +91,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   setTheme(savedTheme);
   setupInteractiveCards();
-  updateHeaderState();
 
   audio.volume = 0.4;
   audio.play().catch(() => {
@@ -119,8 +112,6 @@ document.addEventListener('DOMContentLoaded', () => {
     setTheme(current === 'night' ? 'day' : 'night');
   });
 });
-
-window.addEventListener('scroll', updateHeaderState, { passive: true });
 
 function scrollToGame(id) {
   const el = document.getElementById(id);
