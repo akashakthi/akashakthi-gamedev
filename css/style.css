@@ -44,6 +44,7 @@ body {
 
 body {
   background: transparent;
+  padding-top: 5.4rem;
 }
 
 #particles-canvas {
@@ -95,9 +96,11 @@ body > *:not(#particles-canvas) {
 
 .hero {
   padding-top: 0.8rem;
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 12;
+  left: 0;
+  width: 100%;
+  z-index: 30;
   transition: padding 0.22s ease;
 }
 
@@ -157,11 +160,9 @@ body > *:not(#particles-canvas) {
 
 .floating-controls {
   position: fixed;
-  right: 1rem;
+  right: 5.8rem;
   bottom: 1rem;
   display: flex;
-  flex-direction: row;
-  gap: 0.6rem;
   z-index: 999;
 }
 
@@ -178,12 +179,19 @@ body > *:not(#particles-canvas) {
   font-size: 1.15rem;
 }
 
-#themeToggle {
+.floating-theme-button {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
   width: 56px;
   height: 56px;
   padding: 0;
   font-size: 1.4rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   box-shadow: 0 10px 24px rgba(10, 17, 34, 0.35);
+  z-index: 1000;
 }
 
 .hero-overlay {
@@ -465,6 +473,16 @@ footer {
 
   .hamburger {
     display: inline-flex;
+  }
+
+  .floating-controls {
+    right: 5.2rem;
+    bottom: 0.9rem;
+  }
+
+  .floating-theme-button {
+    right: 0.9rem;
+    bottom: 0.9rem;
   }
 }
 
