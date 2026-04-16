@@ -1,16 +1,17 @@
 :root {
   --bg-gradient:
-    radial-gradient(circle at 5% 0%, rgba(121, 216, 255, 0.25), transparent 32%),
-    radial-gradient(circle at 90% 20%, rgba(173, 136, 255, 0.2), transparent 28%),
-    radial-gradient(circle at 30% 90%, rgba(114, 193, 255, 0.18), transparent 36%),
-    linear-gradient(145deg, #04070e 0%, #091425 42%, #070d1a 100%);
+    radial-gradient(circle at 5% 0%, rgba(121, 216, 255, 0.3), transparent 34%),
+    radial-gradient(circle at 90% 20%, rgba(173, 136, 255, 0.28), transparent 30%),
+    radial-gradient(circle at 30% 90%, rgba(114, 193, 255, 0.24), transparent 38%),
+    linear-gradient(145deg, #010205 0%, #050a15 40%, #040710 100%);
   --text-color: #f4fbff;
   --muted-text: #bdd5e4;
-  --accent: #93efff;
-  --card-bg: rgba(255, 255, 255, 0.12);
-  --card-border: rgba(255, 255, 255, 0.35);
-  --shadow: 0 18px 40px rgba(7, 16, 35, 0.5);
-  --glass-highlight: rgba(255, 255, 255, 0.45);
+  --accent: #8cf6ff;
+  --card-bg: rgba(255, 255, 255, 0.07);
+  --card-border: rgba(169, 235, 255, 0.28);
+  --shadow: 0 18px 40px rgba(1, 6, 18, 0.62);
+  --glass-highlight: rgba(208, 245, 255, 0.35);
+  --neon-glow: 0 0 14px rgba(130, 245, 255, 0.8), 0 0 30px rgba(140, 91, 255, 0.45);
 }
 
 html[data-theme="day"] {
@@ -26,6 +27,7 @@ html[data-theme="day"] {
   --card-border: rgba(255, 255, 255, 0.85);
   --shadow: 0 20px 40px rgba(89, 142, 194, 0.25);
   --glass-highlight: rgba(255, 255, 255, 0.95);
+  --neon-glow: none;
 }
 
 * {
@@ -213,6 +215,7 @@ body > *:not(#particles-canvas) {
   font-size: clamp(2rem, 5vw, 3.2rem);
   margin-bottom: 0.75rem;
   color: var(--accent);
+  text-shadow: var(--neon-glow);
 }
 
 .hero-content p {
@@ -349,6 +352,7 @@ p {
   color: var(--accent);
   text-decoration: none;
   font-weight: 700;
+  text-shadow: 0 0 12px rgba(140, 246, 255, 0.55);
 }
 
 .contact-icons {
