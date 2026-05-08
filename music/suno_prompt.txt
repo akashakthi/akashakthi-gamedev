@@ -1,0 +1,13 @@
+Suno AI Prompt — Aka Portfolio Background Music
+
+Style:
+Futuristic cyber game-dev theme, clean coding energy, upbeat but focused, synthwave + chill electronic, soft cyberpunk atmosphere, glass UI vibe, subtle orchestral rise, inspiring and professional, suitable for a game programmer portfolio website.
+
+Prompt:
+Instrumental futuristic synthwave track for a young game programmer portfolio, clean and confident atmosphere, neon cyan and deep navy mood, smooth electronic drums, warm analog synth bass, shimmering arpeggios, subtle chiptune accents, soft cinematic pads, optimistic multiplayer game development energy, polished tech startup feel, no vocals, seamless loop, modern UI background music, inspiring but not too aggressive, 100 BPM, clean mix, professional, elegant, cyber glass aesthetic.
+
+Negative Prompt:
+No vocals, no rap, no harsh dubstep, no heavy metal, no distorted aggressive lead, no sad piano, no horror ambience, no overly busy melody, no abrupt ending.
+
+Short Version:
+Instrumental futuristic synthwave, neon cyan cyber game developer vibe, clean coding energy, smooth drums, analog synth bass, soft chiptune accents, cinematic pads, inspiring professional portfolio background, seamless loop, no vocals, 100 BPM.
