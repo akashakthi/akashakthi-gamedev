@@ -50,3 +50,122 @@ if (bgMusic && soundToggle) {
   bgMusic.addEventListener('ended', () => setSoundUI('off'));
   bgMusic.addEventListener('error', () => setSoundUI('error'));
 }
+
+// Background music toggle.
+// Put the audio file inside /music.
+// Recommended filename: music/BgmWeb.mp3
+const bgMusic = document.getElementById('bgMusic');
+const soundToggle = document.getElementById('soundToggle');
+const soundIcon = document.getElementById('soundIcon');
+const soundText = document.getElementById('soundText');
+
+const audioCandidates = [
+  'music/BgmWeb.mp3',
+  'music/BgmWeb.mpeg',
+  'music/BgmWeb.wav',
+  'music/BgmWeb.ogg',
+  'music/BgmWeb'
+];
+
+let currentAudioIndex = 0;
+let isMusicReady = false;
+
+function setSoundUI(state) {
+  if (!soundToggle) return;
+
+  soundToggle.classList.toggle('is-playing', state === 'playing');
+  soundToggle.classList.toggle('is-error', state === 'error');
+  soundToggle.setAttribute('aria-pressed', state === 'playing' ? 'true' : 'false');
+
+  if (state === 'playing') {
+    soundIcon.textContent = '♫';
+    soundText.textContent = 'Sound On';
+  } else if (state === 'loading') {
+    soundIcon.textContent = '…';
+    soundText.textContent = 'Loading';
+  } else if (state === 'error') {
+    soundIcon.textContent = '!';
+    soundText.textContent = 'No Audio';
+  } else {
+    soundIcon.textContent = '♪';
+    soundText.textContent = 'Sound Off';
+  }
+}
+
+function setAudioSource(index) {
+  if (!bgMusic) return;
+
+  currentAudioIndex = index;
+  bgMusic.src = audioCandidates[currentAudioIndex];
+  bgMusic.load();
+}
+
+function tryNextAudioSource() {
+  if (!bgMusic) return false;
+
+  currentAudioIndex += 1;
+
+  if (currentAudioIndex >= audioCandidates.length) {
+    setSoundUI('error');
+    console.warn('No playable background music file found. Check /music/BgmWeb.mp3');
+    return false;
+  }
+
+  setAudioSource(currentAudioIndex);
+  return true;
+}
+
+async function playBackgroundMusic() {
+  if (!bgMusic) return;
+
+  setSoundUI('loading');
+
+  try {
+    bgMusic.volume = 0.35;
+
+    if (!isMusicReady) {
+      setAudioSource(currentAudioIndex);
+      isMusicReady = true;
+    }
+
+    await bgMusic.play();
+    setSoundUI('playing');
+  } catch (error) {
+    console.warn('Failed to play current audio source:', bgMusic.src, error);
+
+    if (tryNextAudioSource()) {
+      setTimeout(playBackgroundMusic, 150);
+    } else {
+      setSoundUI('error');
+    }
+  }
+}
+
+function pauseBackgroundMusic() {
+  if (!bgMusic) return;
+
+  bgMusic.pause();
+  setSoundUI('off');
+}
+
+if (bgMusic && soundToggle) {
+  setSoundUI('off');
+
+  soundToggle.addEventListener('click', async () => {
+    if (bgMusic.paused) {
+      await playBackgroundMusic();
+    } else {
+      pauseBackgroundMusic();
+    }
+  });
+
+  bgMusic.addEventListener('error', () => {
+    console.warn('Audio source error:', bgMusic.src);
+
+    if (tryNextAudioSource()) {
+      if (!bgMusic.paused) {
+        setTimeout(playBackgroundMusic, 150);
+      }
+    }
+  });
+}
