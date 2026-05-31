@@ -1,124 +1,354 @@
-const phrases=['Junior Game Programmer @ RIVRS','Unity / C# Developer','Roblox / Lua Developer','Multiplayer Systems Builder','SOLID Principles Advocate'];let pi=0,del=false,txt='';function type(){const full=phrases[pi];txt=del?full.slice(0,txt.length-1):full.slice(0,txt.length+1);document.getElementById('typed').textContent=txt;let speed=del?34:70;if(!del&&txt===full){speed=1500;del=true}else if(del&&txt===''){del=false;pi=(pi+1)%phrases.length;speed=350}setTimeout(type,speed)}type();
-const html=document.documentElement, themeBtn=document.getElementById('themeBtn');themeBtn.onclick=()=>html.classList.toggle('light');document.getElementById('menuBtn').onclick=()=>document.getElementById('nav').classList.toggle('mobile-open');
-const cur=document.getElementById('cursor'), ring=document.getElementById('cursor-ring');let mx=0,my=0,rx=0,ry=0;document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});(function ringLoop(){rx+=(mx-rx)*.13;ry+=(my-ry)*.13;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(ringLoop)})();document.querySelectorAll('a,button,.glass').forEach(el=>{el.addEventListener('mouseenter',()=>{ring.style.width='58px';ring.style.height='58px'});el.addEventListener('mouseleave',()=>{ring.style.width='34px';ring.style.height='34px'})});
-const c=document.getElementById('particle-canvas'),ctx=c.getContext('2d');let W,H,nodes=[],sparks=[];const cols=['rgba(0,245,212,','rgba(59,130,246,','rgba(167,139,250,','rgba(244,114,182,'];function resize(){W=c.width=innerWidth;H=c.height=innerHeight;init()}addEventListener('resize',resize);function init(){nodes=[];sparks=[];for(let i=0;i<Math.max(24,Math.floor(W*H/21000));i++)nodes.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.25,vy:(Math.random()-.5)*.25,s:Math.random()*1.8+0.6,col:cols[Math.floor(Math.random()*cols.length)]});for(let i=0;i<Math.max(42,Math.floor(W*H/16000));i++)sparks.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.35,vy:-(Math.random()*.45+.15),s:Math.random()*2+0.4,a:Math.random()*.45+.12,col:cols[Math.floor(Math.random()*cols.length)]})}function frame(){ctx.clearRect(0,0,W,H);let dark=!html.classList.contains('light'),ga=dark?1:.55;nodes.forEach(n=>{n.x+=n.vx;n.y+=n.vy;if(n.x<0||n.x>W)n.vx*=-1;if(n.y<0||n.y>H)n.vy*=-1});for(let i=0;i<nodes.length;i++){for(let j=i+1;j<nodes.length;j++){let dx=nodes[i].x-nodes[j].x,dy=nodes[i].y-nodes[j].y,d=Math.hypot(dx,dy);if(d<145){ctx.strokeStyle=`rgba(0,245,212,${(1-d/145)*.12*ga})`;ctx.lineWidth=.7;ctx.beginPath();ctx.moveTo(nodes[i].x,nodes[i].y);ctx.lineTo(nodes[j].x,nodes[j].y);ctx.stroke()}}}nodes.forEach(n=>{ctx.fillStyle=n.col+(.72*ga)+')';ctx.beginPath();ctx.arc(n.x,n.y,n.s,0,Math.PI*2);ctx.fill()});sparks.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.y<-20){p.y=H+10;p.x=Math.random()*W}ctx.globalAlpha=p.a*ga;ctx.fillStyle=p.col+'1)';ctx.beginPath();ctx.arc(p.x,p.y,p.s,0,Math.PI*2);ctx.fill();ctx.globalAlpha=1});requestAnimationFrame(frame)}resize();frame();
-const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.12});document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%5)*.05+'s';obs.observe(el)});
+function initSite() {
+  const html = document.documentElement;
+  const typed = document.getElementById('typed');
+  const themeBtn = document.getElementById('themeBtn');
+  const menuBtn = document.getElementById('menuBtn');
+  const nav = document.getElementById('nav');
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursor-ring');
 
-// Background music toggle.
-// Put the audio file inside /music.
-// Recommended filename: music/BgmWeb.mp3
-const bgMusic = document.getElementById('bgMusic');
-const soundToggle = document.getElementById('soundToggle');
-const soundIcon = document.getElementById('soundIcon');
-const soundText = document.getElementById('soundText');
+  const phrases = [
+    'Junior Game Programmer @ RIVRS',
+    'Unity / C# Developer',
+    'Roblox / Lua Developer',
+    'Multiplayer Systems Builder',
+    'SOLID Principles Advocate'
+  ];
 
-const audioCandidates = [
-  'music/BgmWeb.mp3',
-  'music/BgmWeb.mpeg',
-  'music/BgmWeb.wav',
-  'music/BgmWeb.ogg',
-  'music/BgmWeb'
-];
+  function startTyping() {
+    if (!typed) return;
 
-let currentAudioIndex = 0;
-let isMusicReady = false;
+    let phraseIndex = 0;
+    let deleting = false;
+    let text = '';
 
-function setSoundUI(state) {
-  if (!soundToggle) return;
+    function type() {
+      const full = phrases[phraseIndex];
+      text = deleting ? full.slice(0, text.length - 1) : full.slice(0, text.length + 1);
+      typed.textContent = text;
 
-  soundToggle.classList.toggle('is-playing', state === 'playing');
-  soundToggle.classList.toggle('is-error', state === 'error');
-  soundToggle.setAttribute('aria-pressed', state === 'playing' ? 'true' : 'false');
+      let speed = deleting ? 34 : 70;
 
-  if (state === 'playing') {
-    soundIcon.textContent = '♫';
-    soundText.textContent = 'Sound On';
-  } else if (state === 'loading') {
-    soundIcon.textContent = '…';
-    soundText.textContent = 'Loading';
-  } else if (state === 'error') {
-    soundIcon.textContent = '!';
-    soundText.textContent = 'No Audio';
-  } else {
-    soundIcon.textContent = '♪';
-    soundText.textContent = 'Sound Off';
-  }
-}
+      if (!deleting && text === full) {
+        speed = 1450;
+        deleting = true;
+      } else if (deleting && text === '') {
+        deleting = false;
+        phraseIndex = (phraseIndex + 1) % phrases.length;
+        speed = 360;
+      }
 
-function setAudioSource(index) {
-  if (!bgMusic) return;
-
-  currentAudioIndex = index;
-  bgMusic.src = audioCandidates[currentAudioIndex];
-  bgMusic.load();
-}
-
-function tryNextAudioSource() {
-  if (!bgMusic) return false;
-
-  currentAudioIndex += 1;
-
-  if (currentAudioIndex >= audioCandidates.length) {
-    setSoundUI('error');
-    console.warn('No playable background music file found. Check /music/BgmWeb.mp3');
-    return false;
-  }
-
-  setAudioSource(currentAudioIndex);
-  return true;
-}
-
-async function playBackgroundMusic() {
-  if (!bgMusic) return;
-
-  setSoundUI('loading');
-
-  try {
-    bgMusic.volume = 0.35;
-
-    if (!isMusicReady) {
-      setAudioSource(currentAudioIndex);
-      isMusicReady = true;
+      window.setTimeout(type, speed);
     }
 
-    await bgMusic.play();
-    setSoundUI('playing');
-  } catch (error) {
-    console.warn('Failed to play current audio source:', bgMusic.src, error);
-
-    if (tryNextAudioSource()) {
-      setTimeout(playBackgroundMusic, 150);
-    } else {
-      setSoundUI('error');
-    }
+    type();
   }
-}
 
-function pauseBackgroundMusic() {
-  if (!bgMusic) return;
+  function setupTheme() {
+    const savedTheme = localStorage.getItem('aka-theme');
+    html.classList.toggle('light', savedTheme === 'alt');
 
-  bgMusic.pause();
-  setSoundUI('off');
-}
+    themeBtn?.addEventListener('click', () => {
+      html.classList.toggle('light');
+      localStorage.setItem('aka-theme', html.classList.contains('light') ? 'alt' : 'base');
+    });
+  }
 
-if (bgMusic && soundToggle) {
-  setSoundUI('off');
+  function setupMenu() {
+    menuBtn?.addEventListener('click', () => {
+      nav?.classList.toggle('mobile-open');
+    });
 
-  soundToggle.addEventListener('click', async () => {
-    if (bgMusic.paused) {
-      await playBackgroundMusic();
-    } else {
-      pauseBackgroundMusic();
+    nav?.querySelectorAll('a[href^="#"]').forEach((link) => {
+      link.addEventListener('click', () => {
+        nav.classList.remove('mobile-open');
+      });
+    });
+  }
+
+  function setupCursor() {
+    if (!cursor || !ring) return;
+
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let ringX = mouseX;
+    let ringY = mouseY;
+
+    document.addEventListener('mousemove', (event) => {
+      mouseX = event.clientX;
+      mouseY = event.clientY;
+      cursor.style.left = `${mouseX}px`;
+      cursor.style.top = `${mouseY}px`;
+    });
+
+    function loop() {
+      ringX += (mouseX - ringX) * .14;
+      ringY += (mouseY - ringY) * .14;
+      ring.style.left = `${ringX}px`;
+      ring.style.top = `${ringY}px`;
+      window.requestAnimationFrame(loop);
     }
-  });
 
-  bgMusic.addEventListener('error', () => {
-    console.warn('Audio source error:', bgMusic.src);
+    loop();
 
-    if (tryNextAudioSource()) {
-      if (!bgMusic.paused) {
-        setTimeout(playBackgroundMusic, 150);
+    document.querySelectorAll('a, button, .glass, .hero-board').forEach((el) => {
+      el.addEventListener('mouseenter', () => {
+        ring.style.width = '58px';
+        ring.style.height = '58px';
+        ring.style.background = 'rgba(255, 92, 168, .28)';
+      });
+
+      el.addEventListener('mouseleave', () => {
+        ring.style.width = '36px';
+        ring.style.height = '36px';
+        ring.style.background = 'rgba(255, 240, 102, .35)';
+      });
+    });
+  }
+
+  function setupShapes() {
+    const canvas = document.getElementById('particle-canvas');
+    const ctx = canvas?.getContext('2d');
+    if (!canvas || !ctx) return;
+
+    const colors = ['#ff5ca8', '#fff066', '#9deff4', '#a8f77a', '#c6a5ff', '#ff9f5c'];
+    const types = ['rect', 'circle', 'triangle', 'slash'];
+    let width = 0;
+    let height = 0;
+    let shapes = [];
+
+    function makeShape() {
+      return {
+        x: Math.random() * width,
+        y: Math.random() * height,
+        size: Math.random() * 42 + 22,
+        speedX: (Math.random() - .5) * .28,
+        speedY: (Math.random() - .5) * .28,
+        rotate: Math.random() * Math.PI,
+        rotateSpeed: (Math.random() - .5) * .004,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        type: types[Math.floor(Math.random() * types.length)]
+      };
+    }
+
+    function resize() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+      const count = Math.max(12, Math.floor((width * height) / 85000));
+      shapes = Array.from({ length: count }, makeShape);
+    }
+
+    function drawShape(shape) {
+      ctx.save();
+      ctx.translate(shape.x, shape.y);
+      ctx.rotate(shape.rotate);
+      ctx.fillStyle = shape.color;
+      ctx.strokeStyle = '#111111';
+      ctx.lineWidth = 4;
+      ctx.lineJoin = 'round';
+
+      if (shape.type === 'circle') {
+        ctx.beginPath();
+        ctx.arc(0, 0, shape.size * .45, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.stroke();
+      } else if (shape.type === 'triangle') {
+        ctx.beginPath();
+        ctx.moveTo(0, -shape.size * .55);
+        ctx.lineTo(shape.size * .55, shape.size * .45);
+        ctx.lineTo(-shape.size * .55, shape.size * .45);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+      } else if (shape.type === 'slash') {
+        ctx.fillRect(-shape.size * .45, -8, shape.size * .9, 16);
+        ctx.strokeRect(-shape.size * .45, -8, shape.size * .9, 16);
+      } else {
+        ctx.fillRect(-shape.size * .45, -shape.size * .45, shape.size * .9, shape.size * .9);
+        ctx.strokeRect(-shape.size * .45, -shape.size * .45, shape.size * .9, shape.size * .9);
+      }
+
+      ctx.restore();
+    }
+
+    function frame() {
+      ctx.clearRect(0, 0, width, height);
+      ctx.globalAlpha = .62;
+
+      shapes.forEach((shape) => {
+        shape.x += shape.speedX;
+        shape.y += shape.speedY;
+        shape.rotate += shape.rotateSpeed;
+
+        if (shape.x < -80) shape.x = width + 80;
+        if (shape.x > width + 80) shape.x = -80;
+        if (shape.y < -80) shape.y = height + 80;
+        if (shape.y > height + 80) shape.y = -80;
+
+        drawShape(shape);
+      });
+
+      ctx.globalAlpha = 1;
+      window.requestAnimationFrame(frame);
+    }
+
+    resize();
+    window.addEventListener('resize', resize);
+    frame();
+  }
+
+  function setupReveal() {
+    const targets = document.querySelectorAll('.reveal');
+
+    if (!('IntersectionObserver' in window)) {
+      targets.forEach((el) => el.classList.add('visible'));
+      return;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: .12 });
+
+    targets.forEach((el, index) => {
+      el.style.transitionDelay = `${(index % 4) * .05}s`;
+      observer.observe(el);
+    });
+  }
+
+  function setupSmoothAnchors() {
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+      anchor.addEventListener('click', (event) => {
+        const target = document.querySelector(anchor.getAttribute('href'));
+
+        if (target) {
+          event.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  }
+
+  function setupAudio() {
+    const bgMusic = document.getElementById('bgMusic');
+    const soundToggle = document.getElementById('soundToggle');
+    const soundIcon = document.getElementById('soundIcon');
+    const soundText = document.getElementById('soundText');
+
+    if (!bgMusic || !soundToggle || !soundIcon || !soundText) return;
+
+    const audioCandidates = [
+      'music/BgmWeb.mp3',
+      'music/BgmWeb.mpeg',
+      'music/BgmWeb.wav',
+      'music/BgmWeb.ogg'
+    ];
+
+    let currentAudioIndex = 0;
+    let isMusicReady = false;
+
+    function setSoundUI(state) {
+      soundToggle.classList.toggle('is-playing', state === 'playing');
+      soundToggle.classList.toggle('is-error', state === 'error');
+      soundToggle.setAttribute('aria-pressed', state === 'playing' ? 'true' : 'false');
+
+      if (state === 'playing') {
+        soundIcon.textContent = 'ON';
+        soundText.textContent = 'Sound On';
+      } else if (state === 'loading') {
+        soundIcon.textContent = '...';
+        soundText.textContent = 'Loading';
+      } else if (state === 'error') {
+        soundIcon.textContent = 'ERR';
+        soundText.textContent = 'No Audio';
+      } else {
+        soundIcon.textContent = 'OFF';
+        soundText.textContent = 'Sound Off';
       }
     }
-  });
+
+    function setAudioSource(index) {
+      currentAudioIndex = index;
+      bgMusic.src = audioCandidates[currentAudioIndex];
+      bgMusic.load();
+    }
+
+    function tryNextAudioSource() {
+      currentAudioIndex += 1;
+
+      if (currentAudioIndex >= audioCandidates.length) {
+        setSoundUI('error');
+        console.warn('No playable background music file found. Check /music/BgmWeb.mp3');
+        return false;
+      }
+
+      setAudioSource(currentAudioIndex);
+      return true;
+    }
+
+    async function playBackgroundMusic() {
+      setSoundUI('loading');
+
+      try {
+        bgMusic.volume = .35;
+
+        if (!isMusicReady) {
+          setAudioSource(currentAudioIndex);
+          isMusicReady = true;
+        }
+
+        await bgMusic.play();
+        setSoundUI('playing');
+      } catch (error) {
+        console.warn('Failed to play current audio source:', bgMusic.src, error);
+
+        if (tryNextAudioSource()) {
+          window.setTimeout(playBackgroundMusic, 150);
+        } else {
+          setSoundUI('error');
+        }
+      }
+    }
+
+    function pauseBackgroundMusic() {
+      bgMusic.pause();
+      setSoundUI('off');
+    }
+
+    setSoundUI('off');
+
+    soundToggle.addEventListener('click', async () => {
+      if (bgMusic.paused) {
+        await playBackgroundMusic();
+      } else {
+        pauseBackgroundMusic();
+      }
+    });
+
+    bgMusic.addEventListener('error', () => {
+      console.warn('Audio source error:', bgMusic.src);
+
+      if (tryNextAudioSource() && !bgMusic.paused) {
+        window.setTimeout(playBackgroundMusic, 150);
+      }
+    });
+  }
+
+  startTyping();
+  setupTheme();
+  setupMenu();
+  setupCursor();
+  setupShapes();
+  setupReveal();
+  setupSmoothAnchors();
+  setupAudio();
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initSite);
+} else {
+  initSite();
 }
